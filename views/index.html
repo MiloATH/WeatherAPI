@@ -16,7 +16,7 @@
       background-color: #ff9;
       padding: 3px;
     }
-    p.usage {
+    .details {
      display : block;
      background-color: #d0e7d0;
      padding: 15px;
@@ -29,59 +29,85 @@
 </head>
 <body>
 	<h2>Free Code Camp Weather API Pass-through</h2>
-  <p class="usage">
-    USAGE:<br>
-    Use the endpoint: <code>https://fcc-weather-api.glitch.me/</code>. Use this endpoint to get the weather at a location.
-    To prevent abuses this server accepts <code>GET</code> requests only, and serves only the route <code>/api/current?lon=:longitude&lat=:latitude</code>. Images links are included in the JSON under <code>weather[0].icon</code>. This is enough to complete the challenge.
-    <br/>
-    Example:
-    <br/>
-    Request: <a href="https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139" target="_blank"><code>https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139</code></a>
-    <br/>
-    Response: <code>{
-   "coord":{
-      "lon":159,
-      "lat":35
-   },
-   "weather":[
-      {
-         "id":500,
-         "main":"Rain",
-         "description":"light rain",
-         "icon":"https://cdn.glitch.com/6e8889e5-7a72-48f0-a061-863548450de5%2F10n.png?1499366021399"
-      }
-   ],
-   "base":"stations",
-   "main":{
-      "temp":22.59,
-      "pressure":1027.45,
-      "humidity":100,
-      "temp_min":22.59,
-      "temp_max":22.59,
-      "sea_level":1027.47,
-      "grnd_level":1027.45
-   },
-   "wind":{
-      "speed":8.12,
-      "deg":246.503
-   },
-   "rain":{
-      "3h":0.45
-   },
-   "clouds":{
-      "all":92
-   },
-   "dt":1499521932,
-   "sys":{
-      "message":0.0034,
-      "sunrise":1499451436,
-      "sunset":1499503246
-   },
-   "id":0,
-   "name":"",
-   "cod":200
-}</code>
-  </p>
+  <div class="details">
+    <p class="usage">
+      <strong>USAGE:</strong>
+      <br> Use this endpoint: <code>https://fcc-weather-api.glitch.me/</code> to get the current weather at a location.
+      <br> To prevent abuses, this server accepts <code>GET</code> requests only, and serves only the route <code>/api/current?lon=:longitude&lat=:latitude</code>. Image links that match the weather description are included in the JSON under <code>weather[0].icon</code>. This should return all the information you'll need to complete the user stories.
+    </p>
+    <p class="example">
+      <strong>EXAMPLE:</strong>
+      <br/> Request:
+      <a href="https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139" target="_blank">
+        <code>https://fcc-weather-api.glitch.me/api/current?lat=35&lon=139</code>
+      </a>
+      <br/> Response:
+      <code>{
+      "coord":{
+          "lon":139,
+          "lat":35
+      },
+      "weather":[
+          {
+            "id":500,
+            "main":"Rain",
+            "description":"light rain",
+            "icon":"https://cdn.glitch.com/6e8889e5-7a72-48f0-a061-863548450de5%2F10n.png?1499366021399"
+          }
+      ],
+      "base":"stations",
+      "main":{
+          "temp":22.59,
+          "pressure":1027.45,
+          "humidity":100,
+          "temp_min":22.59,
+          "temp_max":22.59,
+          "sea_level":1027.47,
+          "grnd_level":1027.45
+      },
+      "wind":{
+          "speed":8.12,
+          "deg":246.503
+      },
+      "rain":{
+          "3h":0.45
+      },
+      "clouds":{
+          "all":92
+      },
+      "dt":1499521932,
+      "sys":{
+          "message":0.0034,
+          "country":"JP",
+          "sunrise":1499451436,
+          "sunset":1499503246
+      },
+      "id":0,
+      "name":"Shuzenji",
+      "cod":200
+      }</code>
+    </p>
+    <p class="tips">
+      <strong>TIPS:</strong>
+      <br> Most of the information you'll need should be self-explanatory, but there are a few things we'd like to point out:
+      <ul>
+        <li> Inside the main field, there is a parameter called temp_min and a parameter called temp_max. These are not a daily min/max as you might expect - they are the current upper and lower bound for the main temperature. Think of these as a possible temperature range, showing the min and max value that the main temperature could be. They will often be the same value as main.temp.
+        </li>
+        <li>All responses from this api are returned in metric values. It is up to you to figure out how to convert them when it's necessary.</li>
+        <li>The weather field is an array. Weather[0] will show you information on the primary weather conditions for the area. It is possible to have multiple conditions occuring in an area. The weather.main parameter is the overall description of the current condition: weather.description is a more detailed variant of the main condition.</li>
+      </ul>
+      This API pulls it's information from the Open Weather Map API. Should you need more detailed information on the fields returned
+      from this call or the weather descriptions, use the related links below.
+      <br>
+      <a href="https://openweathermap.org/current" target="_blank">
+        <code>https://openweathermap.org/current</code>
+      </a>
+      <br>
+      <a href="https://openweathermap.org/weather-conditions" target="_blank">
+        <code>https://openweathermap.org/weather-conditions</code>
+      </a>
+    </p>
+  </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

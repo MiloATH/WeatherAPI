@@ -44,6 +44,14 @@ app.get("/api/current", function(req, res) {
   var longitude = req.query.lon;
   var latitude = req.query.lat;
   var callback = req.query.callback;
+
+  if (longitude < -180 || longitude > 180 || latitude < -90 || latitude > 90) {
+    res.json({
+        error:
+            'Longitude must be between -180 and 180; Latitude must be between -90 and 90. A number you have entered does not match this criteria. Please check your information and try again.'
+    });
+}
+
   if(!isNaN(longitude) && !isNaN(latitude)){
     var url = weatherAPI + '&lon=' + longitude + '&lat=' + latitude;
     removeDatesOlderThan(60000);
